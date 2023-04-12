@@ -17,6 +17,21 @@ function App() {
     setSelectedOption(clickedOption);
   }
 
+  function handleNextQuestionClick() {
+    if (!selectedOption) return;
+
+    if (currentQuestion.id === questions[questions.length - 1].id) {
+      setFinished(true);
+    } else {
+      const indexOfCurrentQuestion = questions.findIndex((question) => {
+        return question.id === currentQuestion.id;
+      });
+
+      setCurrentQuestion(questions[indexOfCurrentQuestion + 1]);
+      setSelectedOption(null);
+    }
+  }
+
   return (
     <div className="App">
       <div className="quiz">
@@ -41,7 +56,7 @@ function App() {
           <button
             className="next"
             disabled={!selectedOption}
-            onClick={() => null}
+            onClick={handleNextQuestionClick}
           >
             {currentQuestion.id === questions[questions.length - 1].id
               ? "Finish"
