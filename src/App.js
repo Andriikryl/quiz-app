@@ -8,6 +8,15 @@ function App() {
   const [finished, setFinished] = useState(false);
   const [score, setScore] = useState(0);
 
+  function handleOptionClick(clickedOption) {
+    if (selectedOption) return;
+
+    if (clickedOption.id === currentQuestion.answerId) {
+      setScore(score + 1);
+    }
+    setSelectedOption(clickedOption);
+  }
+
   return (
     <div className="App">
       <div className="quiz">
@@ -21,7 +30,7 @@ function App() {
         <div className="options">
           {currentQuestion.options.map((option, i) => (
             <button
-              onClick={() => null}
+              onClick={() => handleOptionClick(option)}
               disabled={selectedOption !== null}
               className={``}
               key={i}
